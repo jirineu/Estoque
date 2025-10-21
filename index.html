@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Controle de Estoque</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div id="notification-area" class="notification hidden"></div>
+
+    <div id="login-screen" class="container">
+        <h1>Acesso ao Sistema</h1>
+        <p id="status-cadastro"></p>
+        
+        <h2>Login</h2>
+        <input type="text" id="loginUsername" placeholder="Nome de Usuário" required> 
+        <input type="password" id="loginPassword" placeholder="Senha" required> 
+        <button onclick="fazerLogin()">Entrar</button>
+        
+        <hr>
+
+        <h2>Cadastro</h2>
+        <input type="text" id="registerUsername" placeholder="Novo Nome de Usuário" required>
+        <input type="password" id="registerPassword" placeholder="Nova Senha" required>
+        <button onclick="fazerCadastro()">Cadastrar Novo Acesso</button>
+    </div>
+
+    <div id="main-content" class="container hidden">
+        <header>
+            
+
+            <div id="header-bar">
+                
+                <div id="menu-icon" onclick="toggleMenu()">
+                    <i class="fa fa-bars"></i>
+                </div>
+
+                <p class="usuariomenu">Usuário: <strong id="usuarioLogadoNome"></strong></p>
+                <h1 id="site-title"> <img src="logo-aladin.jpg" alt="Aladin Iluminação Logo Principal" class="hub-logo"></h1>
+                
+             
+
+            </div>
+            
+
+            
+            
+            
+            
+            <nav id="main-nav" class="hidden">
+                <a href="#" onclick="navegarPara('opcoes-iniciais')"><i class="fa fa-home"></i> Início (Opções)</a> 
+                <a href="#" onclick="navegarPara('adicionar-produto-apenas')"><i class="fa fa-box-open"></i> Adicionar Produto</a>
+                <a href="#" onclick="navegarPara('visualizar-movimentar')"><i class="fa fa-list-check"></i> Visualizar e Movimentar</a>
+                
+                <a href="#" onclick="navegarPara('historico-completo')"><i class="fa fa-clock-rotate-left"></i> Histórico de Movimentos</a>
+                
+                <a href="#" onclick="navegarPara('gerenciar-produtos')"><i class="fa fa-pencil-ruler"></i> Gerenciar Produtos (Edição)</a>
+                
+                <a href="#" onclick="navegarPara('inventario')" id="inventario-link" class="hidden"><i class="fa fa-clipboard-list"></i> Realizar Inventário</a>
+                <a href="#" onclick="navegarPara('gestao-usuarios')" id="gestao-usuarios-link" class="hidden"><i class="fa fa-users-cog"></i> Gestão de Usuários</a>
+                <a href="#" onclick="fazerLogout()" class="logout-link"><i class="fa fa-sign-out-alt"></i> Sair</a>
+            </nav>
+
+            
+        </header>
+        
+        <div id="opcoes-iniciais-page" class="app-page hidden">
+            
+            <div id="hub-logo-container">
+               
+            </div>
+        
+            <h2> <i class="fa fa-th-large"></i> Painel de Opções</h2>
+            <div class="opcoes-grid">
+                
+                <div class="opcao-card" onclick="navegarPara('adicionar-produto-apenas')">
+                    <i class="fa fa-box-open"></i>
+                    <h3>Adicionar Produto</h3>
+                    <p>Cadastre um novo item no sistema de estoque.</p>
+                </div>
+
+                <div class="opcao-card" onclick="navegarPara('visualizar-movimentar')">
+                    <i class="fa fa-list-check"></i>
+                    <h3>Visualizar e Movimentar</h3>
+                    <p>Consulte o estoque atual e registre entradas e saídas.</p>
+                </div>
+                
+            </div>
+        </div>
+        <div id="adicionar-produto-apenas-page" class="app-page hidden">
+            <div id="adicionar-produto" class="card input-row">
+                <h2><i class="fa fa-box-open"></i> Adicionar Produto</h2>
+                <input type="text" id="codigoProduto" placeholder="Código" required> 
+                <input type="text" id="nomeProduto" placeholder="Produto" required>
+                <input type="number" id="quantidadeInicial" placeholder="Quantidade" min="0" value="0" required>
+                
+                <input type="number" id="gramasProduto" placeholder="Gramas (Peso por unidade)" min="0" value="0">
+                <textarea id="observacaoProduto" placeholder="Observação interna (opcional)" rows="3" style="width: 100%; margin-top: 10px;"></textarea>
+                
+                <button onclick="adicionarProduto()">Adicionar Produto</button>
+            </div>
+        </div> 
+        
+        <div id="visualizar-movimentar-page" class="app-page hidden">
+
+            <div id="controle-estoque" class="card input-row">
+                <h2><i class="fa fa-truck-ramp-box"></i> Movimentação (Entrada/Saída)</h2>
+                <select id="selecaoProduto">
+                    <option value="">Selecione um Produto</option>
+                </select>
+                <input type="number" id="quantidadeMovimento" placeholder="Qtd de Movimento" min="1" required>
+                <button class="btn-entrada" onclick="realizarMovimento('entrada')">Entrada</button>
+                <button class="btn-saida" onclick="realizarMovimento('saida')">Saída</button>
+            </div>
+
+            <div id="estoque-atual" class="card">
+                <h2><i class="fa fa-table"></i> Estoque Atual</h2>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th> 
+                                <th>Produto</th>
+                                <th>Qtd. Atual</th>
+                                <th>Qtd. Invent.</th> <th>Gramas</th>
+                                <th>Último Inventário</th>
+                                </tr>
+                        </thead>
+                        <tbody id="tabelaEstoque">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            </div> 
+        
+        <div id="historico-completo-page" class="app-page hidden">
+            <div id="historico" class="card">
+                <h2><i class="fa fa-clock-rotate-left"></i> Histórico Completo de Operações</h2>
+                <div id="historico-filtro" class="input-row">
+                    <label for="filtroOperacao">Filtrar por Tipo:</label>
+                    <select id="filtroOperacao" onchange="atualizarHistoricoCompleto()">
+                        <option value="todos">Todos os Movimentos</option>
+                        <option value="Entrada">Entrada</option>
+                        <option value="Saída">Saída</option>
+                        <option value="Inventário">Inventário (Ajustes)</option>
+                    </select>
+                </div>
+                
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">Data/Hora</th>
+                                <th style="width: 15%;">Usuário</th>
+                                <th style="width: 15%;">Tipo</th>
+                                <th style="width: 35%;">Produto (Código)</th>
+                                <th style="width: 10%;">Qtd</th>
+                                <th style="width: 10%;">Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaHistoricoCompleto"> </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div id="inventario-page" class="app-page hidden">
+            <div id="inventario-controle" class="card input-row">
+                <h2><i class="fa fa-cash-register"></i> Realizar Contagem Física (Inventário)</h2>
+                <p style="width: 100%;">Use esta área para registrar a contagem real do estoque.</p>
+                <select id="selecaoProdutoInventario">
+                    <option value="">Selecione o Produto</option>
+                </select>
+                <input type="number" id="quantidadeInventariadaInput" placeholder="Contagem Física Atual" min="0" required>
+                <button class="btn-inventario" onclick="realizarInventario()">Registrar Contagem e Ajustar Estoque</button>
+            </div>
+            
+            <div id="historico-inventario" class="card">
+                <h2><i class="fa fa-history"></i> Histórico de Entradas e Inventário</h2>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">Data/Hora</th>
+                                <th style="width: 15%;">Usuário</th>
+                                <th style="width: 15%;">Tipo</th>
+                                <th style="width: 40%;">Produto (Código)</th>
+                                <th style="width: 10%;">Qtd</th>
+                                <th style="width: 5%;">Saldo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaHistoricoInventario">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div> 
+        
+        <div id="gestao-usuarios-page" class="app-page hidden">
+            <div id="lista-usuarios-card" class="card">
+                <h2><i class="fa fa-users-cog"></i> Gestão de Acessos</h2>
+                <p>Usuários cadastrados no sistema (Máx: 4). Apenas o Master pode excluir.</p>
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nome de Usuário</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaUsuarios">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> 
+        
+        <div id="gerenciar-produtos-page" class="app-page hidden">
+            <div id="busca-produto-card" class="card input-row">
+                <h2><i class="fa fa-search"></i> Buscar Produto para Gerenciar</h2>
+                <input type="text" id="inputBuscaProduto" placeholder="Buscar por Código ou Nome" style="width: 100%; margin-bottom: 10px;" oninput="filtrarProdutosGerenciamento()">
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Produto</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaBuscaGerenciamento">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="editar-produto-card" class="card input-row hidden" style="margin-top: 20px;">
+                <h2><i class="fa fa-edit"></i> Editar Produto</h2>
+                <p>Editando: <strong id="produtoSendoEditadoNome"></strong></p>
+                
+                <input type="hidden" id="editCodigoOriginal"> 
+                
+                <label for="editCodigoProduto">Novo Código:</label>
+                <input type="text" id="editCodigoProduto" required> 
+
+                <label for="editNomeProduto">Novo Nome:</label>
+                <input type="text" id="editNomeProduto" required>
+                
+                <label for="editGramasProduto">Gramas (Peso por unidade):</label>
+                <input type="number" id="editGramasProduto" min="0" required oninput="calcularValor()">
+                
+                <label for="editObservacaoProduto">Observação Interna:</label>
+                <textarea id="editObservacaoProduto" rows="3" style="width: 100%; margin-top: 5px; margin-bottom: 10px;"></textarea>
+                
+                <label for="celulaCalculoInput">Valor de Cálculo (Divisor):</label>
+                <input type="number" id="celulaCalculoInput" placeholder="Valor divisor para cálculo" min="0.01" oninput="calcularValor()">
+                
+                <p>Resultado do Cálculo (Gramas / Divisor): <strong id="resultadoCalculoDisplay">N/A</strong></p>
+
+                <div style="display: flex; gap: 10px; width: 100%; margin-top: 10px;">
+                    <button class="btn-delete" onclick="excluirProduto()">Excluir Item</button>
+                    <button onclick="salvarEdicaoProduto()" style="flex-grow: 1;">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+        
+    </div> 
+    
+    <script src="script.js"></script>
+</body>
+</html>

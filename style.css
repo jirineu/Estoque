@@ -1,0 +1,475 @@
+/* Estilo geral do corpo da página */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Container principal */
+.container {
+    width: 80%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo padrão dos cards */
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+}
+
+.card h2 {
+    margin-top: 0;
+    color: #34495e;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Formulários */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+/* Definições Globais e Variáveis */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --bg-light: #f8f9fa;
+    --bg-dark: #343a40;
+    --text-dark: #212529;
+    --border-radius: 5px;
+}
+
+/* Base */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: var(--text-dark);
+}
+
+/* ----------------------------- */
+/* ESTILOS DO CABEÇALHO          */
+/* ----------------------------- */
+
+header {
+    display: flex;
+    
+    background-color: var(--bg-dark);
+    color: white;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    height: 12vh;
+    
+}
+
+
+#header-bar {
+display: flex;
+    display:table-column;
+    width:100%;
+    height:100%;
+    position: relative;
+
+    
+
+}
+#header-bar #site-title {
+         display: flex;
+    justify-content: center;
+    align-items: center;
+     height: 100%;
+     width: 100%;
+     margin: 0;
+     padding: 0;
+}
+
+
+
+.hub-logo {
+    
+    max-width:10rem; 
+    height: 3.5rem;
+     
+}
+
+
+.usuariomenu {
+   display:inline;
+   font-size: 0.8rem;
+   color: white;
+  position: absolute;
+  bottom: 0;
+  margin: 3px;
+ }
+
+
+
+
+#menu-icon {
+    display: inline;
+    height: 2rem;
+    width: 2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: fixed;
+    padding: 10px 10px 1px 5px;
+    
+
+}
+
+
+@media (max-width: 600px) {
+    #site-title {
+        font-size: 1rem;
+        text-align: center;
+       
+    }
+    /* Ajuste para o padding do body em telas pequenas */
+    body {
+        padding: 0.625rem;
+    }
+    .container {
+        padding: 0;
+    }
+}
+
+/* ----------------------------- */
+/* ESTILOS DO LOGO NO HUB        */
+/* ----------------------------- */
+
+
+
+
+
+/* ----------------------------- */
+/* NAVEGAÇÃO / MENU SANDUÍCHE    */
+/* ---------------------------- */
+
+#main-nav {
+    display:grid;
+    position: absolute;
+    top: 3.75rem;
+    left: 9rem;
+    z-index: 1000;
+    width: 15.625rem;
+    background-color: #3f51b5;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+#main-nav.hidden {
+    transform: translateX(-100%);
+}
+
+#main-nav a {
+    display: block;
+    padding: 0.938rem 1.2rem;
+    text-decoration: none;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#main-nav a:hover {
+    background-color: #5c70d9;
+}
+
+#main-nav i {
+    margin-right: 1.2rem;
+}
+
+.logout-link {
+    background-color: var(--danger-color);
+    margin-top: 1.2rem;
+    border-radius: 0 0 var(--border-radius) 0;
+}
+
+.logout-link:hover {
+    background-color: #c82333;
+}
+
+/* Formulário e Cards */
+input[type="text"], 
+input[type="password"],
+input[type="number"], 
+select,
+textarea { 
+    width: 100%;
+    padding: 1.2rem;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--border-radius);
+}
+
+
+/* Botões de Ação */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 15px;
+    margin: 10px 5px 0 0;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button.btn-saida {
+    background-color: var(--danger-color);
+}
+button.btn-saida:hover {
+    background-color: #c0392b;
+}
+
+button.btn-entrada {
+    background-color: var(--success-color);
+}
+button.btn-entrada:hover {
+    background-color: #1e7e34;
+}
+
+button.btn-inventario {
+    background-color: #8f00ff; /* Cor roxa para inventário */
+}
+button.btn-inventario:hover {
+    background-color: #6a00cc;
+}
+
+/* Botão de Edição (Usado na Busca/Gerenciamento) */
+button.btn-info {
+    background-color: var(--info-color); /* Azul Claro/Ciano */
+    padding: 8px 10px; 
+    margin: 2px;
+}
+button.btn-info:hover {
+    background-color: #117a8b;
+}
+
+/* Botão de Excluir */
+button.btn-delete {
+    background-color: #8c0000; /* Vermelho escuro para exclusão */
+    margin-right: 10px;
+}
+button.btn-delete:hover {
+    background-color: #630000;
+}
+
+/* Cards e Inputs */
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+/* Força os inputs a serem 100% de largura dentro do input-row em telas menores */
+.input-row input, .input-row select {
+    flex-grow: 1;
+    min-width: 150px;
+    margin: 0;
+}
+
+@media (max-width: 500px) {
+    .input-row input, 
+    .input-row select, 
+    .input-row button {
+        /* Garante que os botões também ocupem a largura total em telas muito pequenas */
+        flex-basis: 100%;
+        min-width: 100%;
+        margin-top: 5px;
+    }
+}
+
+
+/* Estilo para a área de Edição (para labels) */
+#editar-produto-card label {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    font-weight: bold;
+}
+#editar-produto-card p {
+    width: 100%;
+}
+/* Força botões de exclusão/salvar a dividir o espaço */
+#editar-produto-card > div:last-child {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+#editar-produto-card > div:last-child button {
+    flex-grow: 1;
+    margin: 0;
+}
+
+
+/* Tabela */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    justify-content: center;
+
+}
+
+.data-table th, .data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.data-table th {
+    background-color: var(--bg-dark);
+    color: white;
+}
+
+/* Cores das linhas do histórico */
+.entrada-row {
+    background-color: #e6ffe6;
+}
+.saida-row {
+    background-color: #ffe6e6;
+}
+.inventario-row {
+    background-color: #f3e6ff;
+}
+
+/* Alinhamento de colunas */
+.numeric-col {
+    text-align: right;
+    font-weight: bold;
+}
+
+
+/* Notificações */
+.notification {
+    position: fixed;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.notification.hidden {
+    transform: translateY(-100%);
+}
+
+.notification.success {
+    background-color: var(--success-color);
+}
+.notification.error {
+    background-color: var(--danger-color);
+}
+.notification.info {
+    background-color: var(--info-color);
+}
+.notification.warning {
+    background-color: var(--warning-color);
+    color: var(--text-dark);
+}
+
+/* Status Inventário - Classes de status de Conferência removidas */
+
+
+/* Hub de Opções (Grid) */
+.opcoes-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    margin-top: 20px;
+}
+
+.opcao-card {
+    background-color: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.opcao-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.opcao-card i {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.opcao-card h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.opcao-card p {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+/* Utilitário */
+.hidden {
+    display: none !important;
+}
