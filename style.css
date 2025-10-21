@@ -153,7 +153,7 @@ display: flex;
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     #site-title {
         font-size: 1rem;
         text-align: center;
@@ -161,7 +161,7 @@ display: flex;
     }
     /* Ajuste para o padding do body em telas pequenas */
     body {
-        padding: 0.625rem;
+        padding: 10px;
     }
     .container {
         padding: 0;
